@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
         }
 //-------------------------------------------------------------------------------------
 
-
 //----------------------------Editor Controls------------------------------------------
 
 #if UNITY_EDITOR
@@ -116,11 +115,17 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.position = new Vector3(transform.position.x - 5, transform.position.y, transform.position.z);
+            float positionX = transform.position.x - 5;
+            if (positionX < -5)
+                positionX = -5;
+            transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
         }
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.position = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
+            float positionX = transform.position.x + 5;
+            if (positionX > 5)
+                positionX = 5;
+            transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
         }
 #endif 
 
@@ -145,12 +150,18 @@ public class PlayerController : MonoBehaviour
             if (distance.x > 0)
             {
                 //MoveRight
-                transform.position = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
+                float positionX = transform.position.x + 5;
+                if (positionX > 5)
+                    positionX = 5;
+                transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
             }
             else if (distance.x < 0)
             {
                 // Move Left
-                transform.position = new Vector3(transform.position.x - 5, transform.position.y, transform.position.z);
+                float positionX = transform.position.x - 5;
+                if (positionX < -5)
+                    positionX = -5;
+                transform.position = new Vector3(positionX, transform.position.y, transform.position.z);
             }
         }
         else if (yDistance > xDistance && !isJumping && !isRolling)
